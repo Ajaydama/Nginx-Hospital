@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cbi-hospital-nginx
+  labels:
+    app: cbi-hospital-nginx
+spec:
+  selector:
+    matchLabels:
+      app: cbi-hospital-nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cbi-hospital-nginx
+    spec:
+      containers:
+      - image: ajaydama007/nginx-hospital:latest
+        name: cbi-hospital-nginx
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80

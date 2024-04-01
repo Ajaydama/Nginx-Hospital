@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cbi-hospital
+  labels:
+    app: cbi-hospital
+spec:
+  selector:
+    matchLabels:
+      app: cbi-hospital
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cbi-hospital
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: ajaydama007/cbi-hospital:latest
+        name: cbi-hospital
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        command: ["bash","-c","cd cbi-hospital-embedded && flask run --port=5000 --host=0.0.0.0 --reload"]

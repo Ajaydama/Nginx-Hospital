@@ -1,0 +1,11 @@
+k apply -f  deployment-hospital.yaml
+k apply -f service-hospital.yml
+k apply -f deployment-nginx.yaml 
+k apply -f service-nginx.yml
+
+
+
+k delete -f  deployment-hospital.yaml
+k delete -f service-hospital.yml
+k delete -f deployment-nginx.yaml 
+k delete -f service-nginx.yml

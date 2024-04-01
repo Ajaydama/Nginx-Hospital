@@ -1,0 +1,36 @@
+# Pulling base python image from dockerhub
+FROM python:3.9
+
+# Create app directory as working directory
+WORKDIR /app
+
+# Copy code from root repo to the working directory
+COPY . /app
+
+
+
+#COPY --from=ajaydama007/cbi-hospital /home/user1/cbi-hospital-embedded /app/cbi-hospital-embedded
+
+# Run python commands to build and serve the application
+RUN apt-get update && \
+    apt-get install -y python3-dev && \
+    apt-get install build-essential -y && \
+    apt-get install nginx -y && \
+    pip install --upgrade pip 
+
+#RUN pip install -r requirements.txt 
+
+# Copying nginx conf file to nginx configuration path
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Giving executable permission to start.sh and then running it
+RUN chmod 755 start.sh
+CMD  ["./start.sh"]
+
+# Check the Nginx configuration
+RUN nginx -t
+
+# docker build -f Dockerfile-nginx -t ajaydama007/nginx-hospital:latest .
+#  docker run -it --rm  ajaydama007/nginx-hospital:latest bash
+
+
